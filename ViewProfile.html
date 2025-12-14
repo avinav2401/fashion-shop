@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Profile</title>
+    <link rel="stylesheet" href="profileStyle.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">Hostel Zone</div>
+        <div class="back">
+            <a href="index.html">⬅ Back</a>
+        </div>
+    </div>
+
+    <!-- Profile Section -->
+    <div class="profile-container">
+        <h2>Your Profile</h2>
+        <div class="profile-pic">
+            <img src="default-profile.png" alt="Profile Picture">
+        </div>
+        <div class="profile-info">
+            <p><strong>Name:</strong> <span id="profile-name">N/A</span></p>
+            <p><strong>Hostel:</strong> <span id="profile-hostel">N/A</span></p>
+            <p><strong>Room No:</strong> <span id="profile-room">N/A</span></p>
+            <p><strong>Emails:</strong> <span id="profile-emails">N/A</span></p>
+            <p><strong>GitHub:</strong> <span id="profile-github">N/A</span></p>
+            <p><strong>LinkedIn:</strong> <span id="profile-linkedin">N/A</span></p>
+            <p><strong>Portfolio:</strong> <span id="profile-portfolio">N/A</span></p>
+        </div>
+        <div class="edit-button">
+            <a href="EditProfile.html">✏️ Edit Profile</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Load stored profile data
+            document.getElementById("profile-name").innerText = localStorage.getItem("profileName") || "N/A";
+            document.getElementById("profile-hostel").innerText = localStorage.getItem("profileHostel") || "N/A";
+            document.getElementById("profile-room").innerText = localStorage.getItem("profileRoom") || "N/A";
+            document.getElementById("profile-emails").innerText = localStorage.getItem("profileEmails") || "N/A";
+            document.getElementById("profile-github").innerText = localStorage.getItem("profileGitHub") || "N/A";
+            document.getElementById("profile-linkedin").innerText = localStorage.getItem("profileLinkedIn") || "N/A";
+            document.getElementById("profile-portfolio").innerText = localStorage.getItem("profilePortfolio") || "N/A";
+        });
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: #f9f9f9;
+        }
+
+        .header {
+            background: #333;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .header .logo {
+            display: inline-block;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .back a {
+            float: right;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .profile-container {
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0 4px 10px rgb(46, 44, 44);
+            border-radius: 10px;
+        }
+
+        .profile-pic img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+
+        .profile-info p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .edit-button a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .edit-button a:hover {
+            background: #0056b3;
+        }
+    </style>
+
+</body>
+</html>

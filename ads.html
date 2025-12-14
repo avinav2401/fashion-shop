@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advertisements | Fashion Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        .page-header {
+            background-color: #ffebee;
+            /* Light red background */
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            color: #d32f2f;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 50px;
+        }
+
+        .ad-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #f0f0f0;
+            position: relative;
+        }
+
+        .ad-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(211, 47, 47, 0.15);
+        }
+
+        .ad-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #ff5252;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .ad-icon {
+            height: 150px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #d32f2f;
+        }
+
+        .ad-details {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ad-details h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .ad-details p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .view-btn {
+            margin-top: auto;
+            padding: 12px;
+            background-color: white;
+            color: #d32f2f;
+            text-decoration: none;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 600;
+            border: 2px solid #d32f2f;
+            transition: all 0.2s;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .view-btn:hover {
+            background-color: #d32f2f;
+            color: white;
+        }
+
+        .back-nav {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .back-nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="https://i.postimg.cc/TP6JjSTt/logo.webp" alt="Company Logo">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="back-nav">
+        <a href="index.html"><i class='bx bx-arrow-back'></i> Back to Home</a>
+    </div>
+
+    <div class="page-header">
+        <h1>Classifieds & Ads</h1>
+        <p>Discover local opportunities and deals</p>
+    </div>
+
+    <div class="items-grid">
+        <!-- Event Promotions -->
+        <div class="ad-card">
+            <div class="ad-badge">Featured</div>
+            <div class="ad-icon"><i class='bx bx-calendar-event'></i></div>
+            <div class="ad-details">
+                <h3>Event Promotions</h3>
+                <p>Upcoming concerts, festivals, and local gatherings in your area.</p>
+                <button class="view-btn" onclick="viewAd('Events')">View Events</button>
+            </div>
+        </div>
+
+        <!-- Rental Listings -->
+        <div class="ad-card">
+            <div class="ad-icon"><i class='bx bx-building-house'></i></div>
+            <div class="ad-details">
+                <h3>Rental Listings</h3>
+                <p>Apartments, rooms, and houses available for rent.</p>
+                <button class="view-btn" onclick="viewAd('Rentals')">Find Home</button>
+            </div>
+        </div>
+
+        <!-- Discount Sales -->
+        <div class="ad-card">
+            <div class="ad-badge">Hot</div>
+            <div class="ad-icon"><i class='bx bx-tag-alt'></i></div>
+            <div class="ad-details">
+                <h3>Discount Sales</h3>
+                <p>Exclusive deals and clearance sales from top brands.</p>
+                <button class="view-btn" onclick="viewAd('Sales')">View Deals</button>
+            </div>
+        </div>
+
+        <!-- Concert Tickets -->
+        <div class="ad-card">
+            <div class="ad-icon"><i class='bx bx-ticket'></i></div>
+            <div class="ad-details">
+                <h3>Concert Tickets</h3>
+                <p>Buy and sell tickets for music, sports, and theater.</p>
+                <button class="view-btn" onclick="viewAd('Tickets')">Get Tickets</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function viewAd(category) {
+            // No strict auth requirement for viewing ads, but good practice to track
+            console.log(`Viewing ad category: ${category}`);
+            alert(`Showing listings for: ${category}`);
+        }
+    </script>
+
+</body>
+
+</html>

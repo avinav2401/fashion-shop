@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2nd Hand Items | Fashion Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        .page-header {
+            background-color: #ede7f6;
+            /* Light purple background */
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            color: #673ab7;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 50px;
+        }
+
+        .item-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #f0f0f0;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(103, 58, 183, 0.15);
+        }
+
+        .item-icon {
+            height: 150px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #673ab7;
+        }
+
+        .item-details {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item-details h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .item-details p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .action-btn {
+            margin-top: auto;
+            padding: 12px;
+            background-color: #673ab7;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 500;
+            transition: background 0.2s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .action-btn:hover {
+            background-color: #512da8;
+        }
+
+        .back-nav {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .back-nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="https://i.postimg.cc/TP6JjSTt/logo.webp" alt="Company Logo">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="back-nav">
+        <a href="index.html"><i class='bx bx-arrow-back'></i> Back to Home</a>
+    </div>
+
+    <div class="page-header">
+        <h1>2nd Hand Market</h1>
+        <p>Quality pre-loved items at great prices</p>
+    </div>
+
+    <div class="items-grid">
+        <!-- Used Phones -->
+        <div class="item-card">
+            <div class="item-icon"><i class='bx bx-mobile-alt'></i></div>
+            <div class="item-details">
+                <h3>Used Phones</h3>
+                <p>Browse our collection of verified pre-owned smartphones.</p>
+                <button class="action-btn" onclick="checkAuthAndRedirect('phones')">Browse Phones</button>
+            </div>
+        </div>
+
+        <!-- Musical Instruments -->
+        <div class="item-card">
+            <div class="item-icon"><i class='bx bx-music'></i></div>
+            <div class="item-details">
+                <h3>Musical Instruments</h3>
+                <p>Guitars, keyboards, and more looking for a new home.</p>
+                <button class="action-btn" onclick="checkAuthAndRedirect('music')">Browse Instruments</button>
+            </div>
+        </div>
+
+        <!-- Old Books -->
+        <div class="item-card">
+            <div class="item-icon"><i class='bx bx-book'></i></div>
+            <div class="item-details">
+                <h3>Old Books</h3>
+                <p>Textbooks, novels, and rare finds at bargain prices.</p>
+                <button class="action-btn" onclick="checkAuthAndRedirect('books')">Browse Books</button>
+            </div>
+        </div>
+
+        <!-- Laptops -->
+        <div class="item-card">
+            <div class="item-icon"><i class='bx bx-laptop'></i></div>
+            <div class="item-details">
+                <h3>Laptops & PC</h3>
+                <p>Affordable computing power for work and study.</p>
+                <button class="action-btn" onclick="checkAuthAndRedirect('laptops')">Browse Laptops</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkAuthAndRedirect(category) {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('Please sign in to browse items.');
+                window.location.href = 'auth.html?type=login';
+                return;
+            }
+            // For now, just show a message or redirect to a specific listing page (mocked)
+            alert(`Opening listings for: ${category}`);
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication</title>
+    <style>
+        .auth-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: Arial, sans-serif;
+        }
+
+        .role-selection {
+            margin: 20px 0;
+            display: none;
+        }
+
+        .role-selection.active {
+            display: block;
+        }
+
+        .role-option {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .role-option:hover {
+            background-color: #f5f5f5;
+        }
+
+        .role-option.selected {
+            background-color: #e3f2fd;
+            border-color: #2196f3;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            /* Fix padding issue */
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #1976d2;
+        }
+
+        .switch-mode {
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+    <script src="auth.js" defer></script>
+</head>
+
+<body>
+    <div class="auth-container">
+        <h2 id="formTitle">Sign In</h2>
+        <div class="role-selection" id="roleSelection">
+            <div class="role-option" onclick="selectRole('customer')">👤 Customer</div>
+            <div class="role-option" onclick="selectRole('seller')">🏪 Seller</div>
+        </div>
+
+        <form id="authForm" onsubmit="handleAuth(event)">
+            <div class="form-group">
+                <input type="email" id="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            <div class="form-group" id="businessNameField" style="display: none;">
+                <input type="text" id="businessName" placeholder="Business Name">
+            </div>
+            <button type="submit" id="submitBtn">Sign In</button>
+        </form>
+
+        <div class="switch-mode">
+            <span id="switchText">Don't have an account? </span>
+            <a href="#" onclick="switchMode()" id="switchLink">Sign Up</a>
+        </div>
+    </div>
+</body>
+
+</html>

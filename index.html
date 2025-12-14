@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Removed Firebase Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <section class=" top-txt ">
+        <div class="head container ">
+            <div class="head-txt ">
+                <p>Free shipping, 30-day return or refund guarantee.</p>
+            </div>
+        </div>
+
+
+
+        <!-- Update navigation links -->
+
+
+
+
+        <style>
+            /* Improved CSS with better organization and fixes */
+            :root {
+                --primary-color: #4a90e2;
+                --hover-color: #357abd;
+                --background-color: #f8f8f8;
+                --text-color: #333;
+            }
+
+            /* Search Bar Styles */
+            .search-container {
+                flex: 1;
+                margin: 0 20px;
+                position: relative;
+                max-width: 800px;
+            }
+
+            .search-bar {
+                display: flex;
+                align-items: center;
+                background: #fff;
+                border-radius: 25px;
+                padding: 8px 20px;
+                border: 1px solid #ddd;
+                width: 100%;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .search-bar input {
+                flex: 1;
+                border: none;
+                outline: none;
+                padding: 8px 12px;
+                font-size: 16px;
+                background: transparent;
+                min-width: 150px;
+            }
+
+            .search-results {
+                display: none;
+                position: absolute;
+                width: 100%;
+                background: white;
+                border-radius: 0 0 10px 10px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                max-height: 300px;
+                overflow-y: auto;
+                top: 100%;
+                left: 0;
+            }
+
+            .search-results.show {
+                display: block;
+            }
+
+            .search-result-item {
+                padding: 10px 15px;
+                cursor: pointer;
+                transition: background 0.2s;
+            }
+
+            .search-result-item:hover {
+                background: #f5f5f5;
+            }
+
+            .clear-button {
+                display: none;
+                background: none;
+                border: none;
+                cursor: pointer;
+                color: #999;
+                padding: 0 8px;
+            }
+
+            /* Auth Links Styles */
+            .sign_in_up {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                padding: 10px 20px;
+                background-color: var(--background-color);
+                gap: 15px;
+                position: relative;
+                z-index: 1001;
+            }
+
+            .auth-links {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+            }
+
+            .auth-links a {
+                color: var(--text-color);
+                text-decoration: none;
+                font-weight: 500;
+                padding: 8px 16px;
+                border-radius: 4px;
+                transition: all 0.3s ease;
+            }
+
+            .auth-links a:hover {
+                color: #fff;
+                background-color: var(--primary-color);
+            }
+
+            /* Navbar Styles */
+            .navbar {
+                width: 100%;
+                background-color: #fff;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+
+            .navbar-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 20px;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .logo img {
+                height: 50px;
+                width: auto;
+                object-fit: contain;
+            }
+
+            .menu-items {
+                display: flex;
+                list-style: none;
+                gap: 30px;
+                margin: 0;
+                padding: 0;
+            }
+
+            .menu-items li a {
+                text-decoration: none;
+                color: var(--text-color);
+                font-weight: 500;
+                transition: color 0.3s;
+                position: relative;
+                padding: 5px 0;
+            }
+
+            .menu-items li a:hover {
+                color: var(--primary-color);
+            }
+
+            .menu-items li a::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                background: var(--primary-color);
+                bottom: -5px;
+                left: 0;
+                transition: width 0.3s;
+            }
+
+            .menu-items li a:hover::after {
+                width: 100%;
+            }
+
+            /* Profile Menu Styles */
+            .profile {
+                position: relative;
+                display: none;
+                cursor: pointer;
+            }
+
+            .profile-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: 2px solid #ddd;
+                transition: all 0.3s ease;
+            }
+
+            .profile:hover .profile-icon {
+                border-color: var(--primary-color);
+            }
+
+            .profile-menu {
+                display: none;
+                position: absolute;
+                right: 0;
+                top: 50px;
+                background: white;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                border-radius: 5px;
+                overflow: hidden;
+                z-index: 1002;
+                min-width: 200px;
+            }
+
+            .profile-menu a {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 12px 15px;
+                color: var(--text-color);
+                text-decoration: none;
+                transition: background 0.3s;
+            }
+
+            .profile-menu a:hover {
+                background: #f5f5f5;
+                color: var(--primary-color);
+            }
+
+            /* Responsive Styles */
+            @media (max-width: 768px) {
+                .search-container {
+                    margin: 10px 0;
+                    order: 1;
+                    width: 100%;
+                }
+
+                .menu-items {
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    width: 100%;
+                    background: #fff;
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 20px 0;
+                    gap: 15px;
+                    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                    transform: translateY(-150%);
+                    transition: transform 0.5s ease;
+                    z-index: 999;
+                }
+
+                .hamburger-lines {
+                    display: flex;
+                    height: 26px;
+                    width: 32px;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    cursor: pointer;
+                }
+
+                .hamburger-lines .line {
+                    display: block;
+                    height: 4px;
+                    width: 100%;
+                    border-radius: 10px;
+                    background: var(--text-color);
+                    transition: all 0.3s ease;
+                }
+
+                #checkbox:checked~.menu-items {
+                    transform: translateY(0);
+                }
+
+                #checkbox:checked~.hamburger-lines .line1 {
+                    transform: rotate(45deg) translate(5px, 5px);
+                }
+
+                #checkbox:checked~.hamburger-lines .line2 {
+                    opacity: 0;
+                }
+
+                #checkbox:checked~.hamburger-lines .line3 {
+                    transform: rotate(-45deg) translate(5px, -5px);
+                }
+            }
+        </style>
+        </head>
+
+        <body>
+            <!-- Auth Section -->
+            <div class="sign_in_up">
+                <div class="search-container">
+                    <div class="search-bar">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" placeholder="Search products, sellers..." id="searchInput">
+                        <button class="clear-button">✕</button>
+                    </div>
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+
+                <div class="auth-links">
+                    <a href="auth.html?type=login" id="signInLink">SIGN IN</a>
+                    <a href="auth.html?type=register" id="signUpLink">SIGN UP</a>
+                    <a href="#" id="signOutLink" style="display: none;">SIGN OUT</a>
+
+                </div>
+                <div class="auth-links">
+                </div>
+                <div class="profile" onclick="toggleProfileMenu()">
+                    <img src="https://i.postimg.cc/8zJQZ5Z0/profile-icon.png" alt="Profile" class="profile-icon">
+                    <div class="profile-menu" id="profileMenu">
+                        <a href="EditProfile.html">✏️ Edit Profile</a>
+                        <a href="ViewProfile.html">👤 View Profile</a>
+                        <a href="#" id="profileSignOut">Sign Out</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navbar -->
+            <nav class="navbar">
+                <div class="navbar-container">
+                    <input type="checkbox" id="checkbox">
+                    <div class="hamburger-lines" onclick="toggleMenu()">
+                        <span class="line line1"></span>
+                        <span class="line line2"></span>
+                        <span class="line line3"></span>
+                    </div>
+
+                    <ul class="menu-items">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#shop">Shop</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+
+                    <div class="logo">
+                        <img src="https://i.postimg.cc/TP6JjSTt/logo.webp" alt="Company Logo">
+                    </div>
+                </div>
+            </nav>
+
+            <script>
+                // Improved JavaScript with better state management and event handling
+                document.addEventListener('DOMContentLoaded', () => {
+                    initializeAuthState();
+                    setupEventListeners();
+                    setupSearch();
+                });
+
+                function initializeAuthState() {
+
+
+                    updateAuthUI(!!token);
+                    updateProfileMenu(role);
+                }
+
+                function updateAuthUI(isLoggedIn) {
+                    const authElements = {
+                        signInLink: document.getElementById('signInLink'),
+                        signUpLink: document.getElementById('signUpLink'),
+                        signOutLink: document.getElementById('signOutLink'),
+                        profile: document.querySelector('.profile')
+                    };
+
+                    Object.entries(authElements).forEach(([key, element]) => {
+                        if (!element) return;
+                        switch (key) {
+                            case 'signInLink':
+                            case 'signUpLink':
+                                element.style.display = isLoggedIn ? 'none' : 'block';
+                                break;
+                            case 'signOutLink':
+                            case 'profile':
+                                element.style.display = isLoggedIn ? 'block' : 'none';
+                                break;
+                        }
+                    });
+                }
+
+                function updateProfileMenu(role) {
+                    const roleLinks = document.querySelector('.role-specific-links');
+                    if (!roleLinks) return;
+
+                    roleLinks.innerHTML = role === 'seller'
+                        ? '<a href="seller-dashboard.html">📈 Seller Dashboard</a>'
+                        : '<a href="orders.html">📦 My Orders</a>';
+                }
+
+                function toggleProfileMenu(event) {
+                    event.stopPropagation();
+                    const profileMenu = document.getElementById('profileMenu');
+                    profileMenu.style.display = profileMenu.style.display === 'block' ? 'none' : 'block';
+                    closeOtherMenus(profileMenu);
+                }
+
+                function toggleMenu() {
+                    const checkbox = document.getElementById('checkbox');
+                    checkbox.checked = !checkbox.checked;
+                }
+
+                function closeOtherMenus(currentMenu) {
+                    const allMenus = document.querySelectorAll('.profile-menu, .menu-items');
+                    allMenus.forEach(menu => {
+                        if (menu !== currentMenu) {
+                            menu.style.display = 'none';
+                        }
+                    });
+                }
+
+                function setupEventListeners() {
+                    // Document click listener
+                    document.addEventListener('click', (event) => {
+                        if (!event.target.closest('.profile, .menu-items')) {
+                            closeOtherMenus();
+                        }
+                    });
+
+                    // Sign out handlers
+                    document.getElementById('profileSignOut').addEventListener('click', signOut);
+                    document.getElementById('signOutLink').addEventListener('click', signOut);
+                }
+
+                function signOut(event) {
+                    event.preventDefault();
+
+
+                    initializeAuthState();
+                    window.location.href = 'index.html';
+                }
+
+                function setupSearch() {
+                    const searchInput = document.getElementById('searchInput');
+                    const searchResults = document.getElementById('searchResults');
+
+                    searchInput.addEventListener('input', debounce(async (e) => {
+                        const query = e.target.value.trim();
+                        if (query.length < 2) {
+                            searchResults.classList.remove('show');
+                            return;
+                        }
+
+                        try {
+                            const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+                            const results = await response.json();
+                            displaySearchResults(results);
+                        } catch (error) {
+                            console.error('Search error:', error);
+                        }
+                    }, 300));
+                }
+
+                function displaySearchResults(results) {
+                    const searchResults = document.getElementById('searchResults');
+                    searchResults.innerHTML = results.map(result => `
+                        <div class="search-result-item">
+                            ${result.name} (${result.type})
+                        </div>
+                    `).join('');
+                    searchResults.classList.add('show');
+                }
+
+                function debounce(func, timeout = 300) {
+                    let timer;
+                    return (...args) => {
+                        clearTimeout(timer);
+                        timer = setTimeout(() => { func.apply(this, args); }, timeout);
+                    };
+                }
+            </script>
+        </body>
+
+</html>
+
+
+</nav>
+<section id="home">
+    <div class="home_page ">
+        <div class="home_img ">
+            <img src="https://i.postimg.cc/t403yfn9/home2.jpg" alt="img ">
+        </div>
+        <div class="home_txt ">
+            <p class="collectio ">SUMMER COLLECTION</p>
+            <h2>FALL - WINTER<br>Collection 2023</h2>
+            <div class="home_label ">
+                <p>A specialist label creating luxury essentials. Ethically crafted<br>with an unwavering commitment to
+                    exceptional quality.</p>
+            </div>
+            <button><a href="#sellers">SHOP NOW</a><i class='bx bx-right-arrow-alt'></i></button>
+            <div class="home_social_icons">
+                <a href="#"><i class='bx bxl-facebook'></i></a>
+                <a href="#"><i class='bx bxl-twitter'></i></a>
+                <a href="#"><i class='bx bxl-pinterest'></i></a>
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="collection">
+    <div class="collections container">
+        <div class="content">
+            <img src="https://i.postimg.cc/Xqmwr12c/clothing.webp" alt="img" />
+            <div class="img-content">
+                <p>Snacks & Drinks</p>
+                <button> <a href="snacks.html" class="category">BUY NOW</a></button>
+            </div>
+        </div>
+        <div class="content2">
+            <img src="https://i.postimg.cc/8CmBZH5N/shoes.webp" alt="img" />
+            <div class="img-content2">
+                <p>Services</p>
+                <button> <a href="services.html" class="category">BUY NOW</a></button>
+            </div>
+        </div>
+        <div class="content3">
+            <img src="https://i.postimg.cc/MHv7KJYp/access.webp" alt="img" />
+            <div class="img-content3">
+
+                <!-- Removed Firebase Scripts at bottom -->
+
+                <script>
+                    // Auth State Management
+                    const token = localStorage.getItem('token');
+                    const role = localStorage.getItem('role');
+                    const userId = localStorage.getItem('userId');
+
+                    function initializeAuthState() {
+                        if (token) {
+                            console.log("User is signed in:", userId);
+                            updateAuthUI(true, role);
+                        } else {
+                            console.log("User is signed out");
+                            updateAuthUI(false);
+                        }
+                    }
+
+                    // UI Updates
+                    function updateAuthUI(isLoggedIn, role = null) {
+                        const elements = {
+                            signIn: document.getElementById('signInLink'),
+                            signUp: document.getElementById('signUpLink'),
+                            signOut: document.getElementById('signOutLink'),
+                            profile: document.querySelector('.profile')
+                        };
+
+                        // Toggle visibility
+                        if (elements.signIn) elements.signIn.style.display = isLoggedIn ? 'none' : 'block';
+                        if (elements.signUp) elements.signUp.style.display = isLoggedIn ? 'none' : 'block';
+                        if (elements.signOut) elements.signOut.style.display = isLoggedIn ? 'block' : 'none';
+                        if (elements.profile) elements.profile.style.display = isLoggedIn ? 'block' : 'none';
+
+                        // Update role-specific UI if logged in
+                        if (isLoggedIn) updateProfileMenu(role);
+                    }
+
+                    function updateProfileMenu(role) {
+                        const roleLinks = document.querySelector('.role-specific-links');
+                        // If element doesn't exist, we might need to add it or ignore
+                        if (!roleLinks) return;
+
+                        roleLinks.innerHTML = role === 'seller'
+                            ? '<a href="seller-dashboard.html">📈 Seller Dashboard</a>'
+                            : '<a href="orders.html">📦 My Orders</a>';
+                    }
+
+                    // Event Listeners
+                    function setupAuthListeners() {
+                        // Sign out handlers
+                        const signOutButtons = [
+                            document.getElementById('signOutLink'),
+                            document.getElementById('profileSignOut')
+                        ].filter(Boolean);
+
+                        signOutButtons.forEach(btn => {
+                            btn.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                localStorage.removeItem('token');
+                                localStorage.removeItem('role');
+                                localStorage.removeItem('userId');
+                                window.location.href = "index.html";
+                            });
+                        });
+
+                        // Profile menu toggle
+                        const profile = document.querySelector('.profile');
+                        if (profile) {
+                            profile.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                const menu = document.getElementById('profileMenu');
+                                if (menu) menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                            });
+                        }
+
+                        // Close menu when clicking outside
+                        document.addEventListener('click', () => {
+                            const menu = document.getElementById('profileMenu');
+                            if (menu) menu.style.display = 'none';
+                        });
+                    }
+
+                    function addToCart(itemName, price) {
+                        const token = localStorage.getItem('token');
+                        if (!token) {
+                            alert('Please sign in to buy items.');
+                            window.location.href = 'auth.html?type=login';
+                            return;
+                        }
+                        // In a real application, you would send an API request here
+                        alert(`Added ${itemName} to cart! Price: $${price}`);
+                    }
+
+                    // Initialize
+                    document.addEventListener('DOMContentLoaded', () => {
+                        setupAuthListeners();
+                        initializeAuthState();
+                        setupSearch(); // Assuming setupSearch is defined elsewhere or in the previous script block
+                    });
+
+                    function toggleProfileMenu(event) {
+                        event.stopPropagation();
+                        const menu = document.getElementById('profileMenu');
+                        if (menu) {
+                            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                        }
+                    }
+                </script>
+
+                <p>2nd Hand Items</p>
+                <button><a href="secondhand.html" class="category">BUY NOW</a></button>
+            </div>
+        </div>
+        <div class="content4">
+            <img src="https://i.postimg.cc/8CmBZH5N/shoes.webp" alt="Advertisement product" />
+            <div class="img-content4">
+                <p class="ad-label">Advertisements</p>
+                </button><a href="ads.html" class="ad-button">BUY NOW</a><button>
+            </div>
+        </div>
+</section>
+<section id="sellers">
+    <div class="seller container">
+        <h2>Top Sales</h2>
+        <div class="best-seller">
+            <div class="best-p1">
+                <img src="https://i.postimg.cc/8CmBZH5N/shoes.webp" alt="img">
+                <div class="best-p1-txt">
+                    <div class="name-of-p">
+                        <p>PS England Shoes</p>
+                    </div>
+                    <div class="rating">
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bx-star'></i>
+                        <i class='bx bx-star'></i>
+                    </div>
+                    <div class="price">
+                        &dollar;37.24
+                        <div class="colors">
+                            <i class='bx bxs-circle red'></i>
+                            <i class='bx bxs-circle blue'></i>
+                            <i class='bx bxs-circle white'></i>
+                        </div>
+                    </div>
+                    <div class="buy-now">
+                        <button><a href="">Buy Now</a></button>
+                    </div>
+                    <!-- <div class="add-cart">
+                            <button>Add To Cart</button>
+                        </div> -->
+                </div>
+            </div>
+            <div class="best-p1">
+                <img src="https://i.postimg.cc/76X9ZV8m/Screenshot_from_2022-06-03_18-45-12.png" alt="img">
+                <div class="best-p1-txt">
+                    <div class="name-of-p">
+                        <p>PS England Jacket</p>
+                    </div>
+                    <div class="rating">
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bx-star'></i>
+                        <i class='bx bx-star'></i>
+                        <i class='bx bx-star'></i>
+                    </div>
+                    <div class="price">
+                        &dollar;17.24
+                        <div class="colors">
+                            <i class='bx bxs-circle green'></i>
+                            <i class='bx bxs-circle grey'></i>
+                            <i class='bx bxs-circle brown'></i>
+                        </div>
+                    </div>
+                    <div class="buy-now">
+                        <button onclick="addToCart('PS England Jacket', 17.24)">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="best-p1">
+                <img src="https://i.postimg.cc/j2FhzSjf/bs2.png" alt="img">
+                <div class="best-p1-txt">
+                    <div class="name-of-p">
+                        <p>PS England Shirt</p>
+                    </div>
+                    <div class="rating">
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bx-star'></i>
+                    </div>
+                    <div class="price">
+                        &dollar;27.24
+                        <div class="colors">
+                            <i class='bx bxs-circle brown'></i>
+                            <i class='bx bxs-circle green'></i>
+                            <i class='bx bxs-circle blue'></i>
+                        </div>
+                    </div>
+                    <div class="buy-now">
+                        <button onclick="addToCart('PS England Shirt', 27.24)">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="best-p1">
+                <img src="https://i.postimg.cc/QtjSDzPF/bs3.png" alt="img">
+                <div class="best-p1-txt">
+                    <div class="name-of-p">
+                        <p>PS England Shoes</p>
+                    </div>
+                    <div class="rating">
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                    </div>
+                    <div class="price">
+                        &dollar;43.67
+                        <div class="colors">
+                            <i class='bx bxs-circle red'></i>
+                            <i class='bx bxs-circle grey'></i>
+                            <i class='bx bxs-circle blue'></i>
+                        </div>
+                    </div>
+                    <div class="buy-now">
+                        <button onclick="addToCart('PS England Shoes', 43.67)">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="seller container">
+        <h2>New Arrivals</h2>
+        <div class="best-seller">
+            <div class="best-p1">
+                <img src="https://i.postimg.cc/fbnB2yfj/na1.png" alt="img">
+                <div class="best-p1-txt">
+                    <div class="name-of-p">
+                        <p>PS England T-Shirt</p>
+                    </div>
+                    <div class="rating">
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                    </div>
+                    <div class="price">
+                        &dollar;10.23
+                        <div class="colors">
+                            <i class='bx bxs-circle blank'></i>
+                            <i class='bx bxs-circle blue'></i>
+                            <i class='bx bxs-circle brown'></i>
+                        </div>
+                    </div>
+                    <div class="buy-now">
+                        <button onclick="addToCart('PS England T-Shirt', 10.23)">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="best-p1">
+                <img src="https://i.postimg.cc/zD02zJq8/na2.png" alt="img">
+                <div class="best-p1-txt">
+                    <div class="name-of-p">
+                        <p>PS England Bag</p>
+                    </div>
+                    <div class="rating">
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bx-star'></i>
+                        <i class='bx bx-star'></i>
+                        <i class='bx bx-star'></i>
+                        <i class='bx bx-star'></i>
+                    </div>
+                    <div class="price">
+                        &dollar;09.28
+                        <div class="colors">
+                            <i class='bx bxs-circle brown'></i>
+                            <i class='bx bxs-circle red'></i>
+                            <i class='bx bxs-circle green'></i>
+                        </div>
+                    </div>
+                    <div class="buy-now">
+                        <button onclick="addToCart('PS England Bag', 9.28)">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="best-p1">
+                <img src="https://i.postimg.cc/Dfj5VBcz/sunglasses1.jpg" alt="img">
+                <div class="best-p1-txt">
+                    <div class="name-of-p">
+                        <p>PS England Sunglass</p>
+                    </div>
+                    <div class="rating">
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                    </div>
+                    <div class="price">
+                        &dollar;06.24
+                        <div class="colors">
+                            <i class='bx bxs-circle grey'></i>
+                            <i class='bx bxs-circle blank'></i>
+                            <i class='bx bxs-circle blank'></i>
+                        </div>
+                    </div>
+                    <div class="buy-now">
+                        <button onclick="addToCart('PS England Sunglass', 6.24)">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="best-p1">
+                <img src="https://i.postimg.cc/FszW12Kc/na4.png" alt="img">
+                <div class="best-p1-txt">
+                    <div class="name-of-p">
+                        <p>PS England Shoes</p>
+                    </div>
+                    <div class="rating">
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                    </div>
+                    <div class="price">
+                        &dollar;43.67
+                        <div class="colors">
+                            <i class='bx bxs-circle grey'></i>
+                            <i class='bx bxs-circle red'></i>
+                            <i class='bx bxs-circle blue'></i>
+                        </div>
+                    </div>
+                    <div class="buy-now">
+                        <button onclick="addToCart('PS England Shoes', 43.67)">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="seller container">
+        <h2>Hot Sales</h2>
+        <div class="best-seller">
+            <div class="best-p1">
+                <img src="https://i.postimg.cc/jS7pSQLf/na4.png" alt="img">
+                <div class="best-p1-txt">
+                    <div class="name-of-p">
+                        <p>PS England Shoes</p>
+                    </div>
+                    <div class="rating">
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                    </div>
+                    <div class="price">
+                        &dollar;37.24
+                        <div class="colors">
+                            <i class='bx bxs-circle grey'></i>
+                            <i class='bx bxs-circle black'></i>
+                            <i class='bx bxs-circle blue'></i>
+                        </div>
+                    </div>
+                    <div class="buy-now">
+                        <button onclick="addToCart('PS England Shoes', 37.24)">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="best-p1">
+                <img src="https://i.postimg.cc/fbnB2yfj/na1.png" alt="img">
+                <div class="best-p1-txt">
+                    <div class="name-of-p">
+                        <p>PS England T-Shirt</p>
+                    </div>
+                    <div class="rating">
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                    </div>
+                    <div class="price">
+                        &dollar;10.23
+                        <div class="colors">
+                            <i class='bx bxs-circle blank'></i>
+                            <i class='bx bxs-circle blue'></i>
+                            <i class='bx bxs-circle brown'></i>
+                        </div>
+                    </div>
+                    <div class="buy-now">
+                        <button onclick="addToCart('PS England T-Shirt', 10.23)">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="best-p1">
+                <img src="https://i.postimg.cc/RhVP7YQk/hs1.png" alt="img">
+                <div class="best-p1-txt">
+                    <div class="name-of-p">
+                        <p>PS England T-Shirt</p>
+                    </div>
+                    <div class="rating">
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                    </div>
+                    <div class="price">
+                        &dollar;15.24
+                        <div class="colors">
+                            <i class='bx bxs-circle blank'></i>
+                            <i class='bx bxs-circle red'></i>
+                            <i class='bx bxs-circle blue'></i>
+                        </div>
+                    </div>
+                    <div class="buy-now">
+                        <button onclick="addToCart('PS England T-Shirt', 15.24)">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="best-p1">
+                <img src="https://i.postimg.cc/zD02zJq8/na2.png" alt="img">
+                <div class="best-p1-txt">
+                    <div class="name-of-p">
+                        <p>PS England Bag</p>
+                    </div>
+                    <div class="rating">
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bx-star'></i>
+                        <i class='bx bx-star'></i>
+                        <i class='bx bx-star'></i>
+                        <i class='bx bx-star'></i>
+                    </div>
+                    <div class="price">
+                        &dollar;09.28
+                        <div class="colors">
+                            <i class='bx bxs-circle blank'></i>
+                            <i class='bx bxs-circle grey'></i>
+                            <i class='bx bxs-circle brown'></i>
+                        </div>
+                    </div>
+                    <div class="buy-now">
+                        <button onclick="addToCart('PS England Bag', 9.28)">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="news">
+    <div class="news-heading">
+        <p>LATEST NEWS</p>
+        <h2>Fashion New Trends</h2>
+    </div>
+    <div class="l-news container">
+        <div class="l-news1">
+            <div class="news1-img">
+                <img src="https://i.postimg.cc/2y6wbZCm/news1.jpg" alt="img">
+            </div>
+            <div class="news1-conte">
+                <div class="date-news1">
+                    <p><i class='bx bxs-calendar'></i> 12 February 2022</p>
+                    <h4>What Curling Irons Are The Best Ones</h4>
+                    <a href="https://www.vogue.com/article/best-curling-irons" target="_blank">read more</a>
+                </div>
+            </div>
+        </div>
+        <div class="l-news2">
+            <div class="news2-img">
+                <img src="https://i.postimg.cc/9MXPK7RT/news2.jpg" alt="img">
+            </div>
+            <div class="news2-conte">
+                <div class="date-news2">
+                    <p><i class='bx bxs-calendar'></i> 17 February 2022</p>
+                    <h4>The Health Benefits Of Sunglasses</h4>
+                    <a href="https://www.rivieraopticare.com/blog/314864-the-health-benefits-of-wearing-sunglasses_2/"
+                        target="_blank">read more</a>
+                </div>
+            </div>
+        </div>
+        <div class="l-news3">
+            <div class="news3-img">
+                <img src="https://i.postimg.cc/x1KKdRLM/news3.jpg" alt="img">
+            </div>
+            <div class="news3-conte">
+                <div class="date-news3">
+                    <p><i class='bx bxs-calendar'></i> 26 February 202</p>
+                    <h4>Eternity Bands Do Last Forever</h4>
+                    <a href="https://www.briangavindiamonds.com/news/eternity-bands-symbolize-love-that-lasts-forever/"
+                        target="_blank">read more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="contact">
+    <div class="contact container">
+        <div class="map">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.121169986175!2d73.90618951442687!3d18.568575172551647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c131ed5b54a7%3A0xad718b8b2c93d36d!2sSky%20Vista!5e0!3m2!1sen!2sin!4v1654257749399!5m2!1sen!2sin"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <form action="https://formspree.io/f/xzbowpjq" method="POST">
+            <div class="form">
+                <div class="form-txt">
+                    <h4>INFORMATION</h4>
+                    <h1>Contact Us</h1>
+                    <span>As you might expect of a company that began as a high-end interiors contractor, we pay strict
+                        attention.</span>
+                    <h3>USA</h3>
+                    <p>195 E Parker Square Dr, Parker, CO 801<br>+43 982-314-0958</p>
+                    <h3>India</h3>
+                    <p>HW95+C9C, Lorem ipsum dolor sit.<br>411014</p>
+                </div>
+                <div class="form-details">
+                    <input type="text" name="name" id="name" placeholder="Name" required>
+                    <input type="email" name="email" id="email" placeholder="Email" required>
+                    <textarea name="message" id="message" cols="52" rows="7" placeholder="Message" required></textarea>
+                    <button>SEND MESSAGE</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<footer>
+    <div class="footer-container container">
+        <div class="content_1">
+            <img src="https://i.postimg.cc/htGyQ4JB/footer-logo.png" alt="logo">
+            <p>The customer is at the heart of our<br>unique business model, which includes<br>design.</p>
+            <img src="https://i.postimg.cc/Nj9dgJ98/cards.png" alt="cards">
+        </div>
+        <div class="content_2">
+            <h4>SHOPPING</h4>
+            <a href="#sellers">Clothing Store</a>
+            <a href="#sellers">Trending Shoes</a>
+            <a href="#sellers">Accessories</a>
+            <a href="#sellers">Sale</a>
+        </div>
+        <div class="content_3">
+            <h4>SHOPPING</h4>
+            <a href="./contact.html">Contact Us</a>
+            <a href="https://payment-method-sb.netlify.app/" target="_blank">Payment Method</a>
+            <a href="https://delivery-status-sb.netlify.app/" target="_blank">Delivery</a>
+            <a href="https://codepen.io/sandeshbodake/full/Jexxrv" target="_blank">Return and Exchange</a>
+        </div>
+        <div class="content_4">
+            <div class="content_4">
+                <h4>NEWSLETTER</h4>
+                <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+                <div class="f-mail">
+                    <div class="input-group"> <!-- Flex container -->
+                        <i class='bx bx-envelope'></i>
+                        <input type="email" placeholder="Your Email" required>
+                        <button type="submit">Join</button>
+                    </div>
+                </div>
+                <hr>
+            </div>
+
+
+            <div class="f-design">
+                <div class="f-design-txt container">
+                    <p>Design and Code by avinav</p>
+                </div>
+            </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="index.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Other head elements -->
+        <link rel="stylesheet" href="auth-style.css">
+    </head>
+
+    <title>Welcome</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="#" id="signOutLink">SIGN OUT</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Welcome to Your Account</h1>
+        <!-- Add protected content here -->
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+        const firebaseConfig = { /* Same as index.html */ };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Sign out handler
+        document.getElementById('signOutLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            signOut(auth).then(() => window.location.href = "index.html");
+        });
+    </script>
+    <head>
+        
+</body>
+<head>
+    
+</html>

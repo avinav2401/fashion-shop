@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snacks & Drinks | Fashion Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        .page-header {
+            background-color: #fff3e0;
+            /* Warm background for food */
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            color: #e65100;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 50px;
+        }
+
+        .food-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .food-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .food-image {
+            height: 200px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+        }
+
+        .food-details {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .food-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        .food-price {
+            color: #e65100;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .order-btn {
+            margin-top: auto;
+            padding: 10px;
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+        .order-btn:hover {
+            background-color: #f57c00;
+        }
+
+        .back-nav {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .back-nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="https://i.postimg.cc/TP6JjSTt/logo.webp" alt="Company Logo">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="back-nav">
+        <a href="index.html"><i class='bx bx-arrow-back'></i> Back to Home</a>
+    </div>
+
+    <div class="page-header">
+        <h1>Snacks & Drinks</h1>
+        <p>Delicious treats delivered to your room</p>
+    </div>
+
+    <div class="items-grid">
+        <!-- Cold Drinks -->
+        <div class="food-card">
+            <div class="food-image">🥤</div>
+            <div class="food-details">
+                <h3>Cold Drinks</h3>
+                <p class="food-price">$1.50</p>
+                <button class="order-btn" onclick="addToCart('Cold Drink', 1.50)">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Cookies -->
+        <div class="food-card">
+            <div class="food-image">🍪</div>
+            <div class="food-details">
+                <h3>Fresh Cookies</h3>
+                <p class="food-price">$2.00</p>
+                <button class="order-btn" onclick="addToCart('Cookies', 2.00)">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Pizza -->
+        <div class="food-card">
+            <div class="food-image">🍕</div>
+            <div class="food-details">
+                <h3>Pizza Slice</h3>
+                <p class="food-price">$3.50</p>
+                <button class="order-btn" onclick="addToCart('Pizza Slice', 3.50)">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Burgers -->
+        <div class="food-card">
+            <div class="food-image">🍔</div>
+            <div class="food-details">
+                <h3>Cheese Burger</h3>
+                <p class="food-price">$4.50</p>
+                <button class="order-btn" onclick="addToCart('Cheese Burger', 4.50)">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function addToCart(item, price) {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('Please sign in to order.');
+                window.location.href = 'auth.html?type=login';
+                return;
+            }
+            alert(`Added ${item} to cart!`);
+        }
+    </script>
+
+</body>
+
+</html>
